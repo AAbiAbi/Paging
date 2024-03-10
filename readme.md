@@ -14,16 +14,19 @@ Physical Memory: 65,536 bytes.
 Use bit-masking and bit-shifting to extract the page number and offset from the logical address.
 
 ```c
-Copy code
+
 unsigned int page_number = (logical_address >> 8) & 0xFF;
 unsigned int offset = logical_address & 0xFF;
 ```
 
 ## Step 3: Initialize Data Structures
+
+Initially, we suggest that you bypass the TLB and use only a page table
+
 You need to initialize the page table and the TLB. Optionally, you can start without the TLB and add it later.
 
 ```c
-Copy code
+
 int page_table[256]; // Initialize to -1 to indicate that no pages are loaded.
 int tlb[16][2]; // First column for page numbers, second for frame numbers. Initialize appropriately.
 ```
@@ -44,7 +47,7 @@ Here's a snippet to help you get started with extracting the page number and off
 
 ```c
 Copy code
-#include <stdio.h>
+
 
 void extract_page_number_and_offset(unsigned int logical_address) {
     unsigned int page_number = (logical_address >> 8) & 0xFF;
@@ -62,6 +65,18 @@ int main() {
 
     return 0;
 }
+```
+
+Output:
+```sh
+(base) NLiangs-MacBook-Pro:Project4 a25076$ cd "/Users/a25076/Desktop/COEN283 OS/Project4/" && gcc extract_pageNum_and_offset.c -o extract_pageNum_and_offset && "/Users/a25076/Desktop/COEN283 OS/Project4/"extract_pageNum_and_offset
+Logical Address: 1 => Page Number: 0, Offset: 1
+Logical Address: 256 => Page Number: 1, Offset: 0
+Logical Address: 32768 => Page Number: 128, Offset: 0
+Logical Address: 32769 => Page Number: 128, Offset: 1
+Logical Address: 128 => Page Number: 0, Offset: 128
+Logical Address: 64434 => Page Number: 251, Offset: 178
+Logical Address: 33153 => Page Number: 129, Offset: 129
 ```
 This code will print the logical address along with the extracted page number and offset for the provided addresses. Remember, this is just the beginning. You'll need to expand upon this to handle reading from the file, translating addresses using the page table (and TLB), and outputting the required information.
 

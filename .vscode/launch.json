@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/a25076/Desktop/COEN283 OS/Project4",
+      "program": "/Users/a25076/Desktop/COEN283 OS/Project4/build/Debug/outDebug"
+    }
+  ]
+}
